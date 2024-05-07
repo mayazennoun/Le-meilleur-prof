@@ -26,7 +26,9 @@ import JulesAbidiScreen from './screens/JulesAbidiScreen';
 import SandrinePhoreScreen from './screens/SandrinePhoreScreen';
 import VincentLaurentScreen from './screens/VincentLaurentScreen';
 import CarteCadeauPage from './screens/CarteCadeauPage';
-import ProfileForm from './screens/MonprofilScreen';
+
+import ExploreScreen from './screens/ExploreScreen';
+
 
 
 
@@ -59,8 +61,9 @@ export default function App() {
    <Stack.Screen name='Reservation' component={ReservationForm}/>
    <Stack.Screen name='Gift' component={CarteCadeauPage}/>
   <Stack.Screen name='MonProfile' component={MonprofilScreen}/>
+  <Stack.Screen name='Explore' component={ExploreScreen}/>
+  <Stack.Screen name='MProfil' component={ProfilScreen}/>
  
-   
   </Stack.Navigator>
 </NavigationContainer>
   );

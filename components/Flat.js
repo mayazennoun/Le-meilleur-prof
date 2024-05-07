@@ -2,9 +2,9 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
 
 const subjects = [
-  { name: 'Arabe', image: require('../assets/Clement Fournier.jpg') },{ name: 'Théâtre', image: require('../assets/Clement Fournier.jpg') }
+  { name: 'Arabe', image: require('../assets/LeMeilleurProf.jpg') },{ name: 'Théâtre', image: require('../assets/PP.jpg') }
   
-  // Ajoutez d'autres matières avec leurs images correspondantes
+  
 ];
 
 const SubjectItem = ({ item }) => (
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
   subjectImage: {
     marginTop:20,
     margin:-8,
-    width: 260, // Ajustez la largeur de l'image selon vos besoins
-    height: 200, // Ajustez la hauteur de l'image selon vos besoins
+    width: 340, 
+    height: 160, 
     marginBottom: 1,
-    borderRadius: 10, // Arrondir les coins de l'image si nécessaire
+    borderRadius: 10, 
   },
   subjectName: {
     fontSize: 16,

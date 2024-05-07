@@ -1,26 +1,20 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-const ExploreScreen = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const navigation = useNavigation();
-
-  
-    const professorsData = [
+const professorsData = [
+    
         {
             id: 1,
             prenom: 'Jean',
             nom: 'Dupont',
-            matiere: 'Mathématiques',
+            matiere: 'Mathématiques   ',
             photo: require('../assets/profDupontPhoto .jpg'),
             screenName: 'ItemJeanDupont'
         },
         {
             id: 2,
             prenom: 'Marie',
-            nom: 'Martin',
+            nom: 'Martin  ',
             matiere: 'Français',
             photo: require('../assets/MarieMartin.jpg'),
             screenName: 'ItemMarieMartin'
@@ -28,7 +22,7 @@ const ExploreScreen = () => {
         {
          id: 3,
             prenom: 'Pierre',
-            nom: 'Bernard',
+            nom: 'Bernard   ',
             matiere: 'Histoire',
             photo: require('../assets/Pierre Bernard.jpg'),
             screenName: 'ItemPierreBernard' 
@@ -36,7 +30,7 @@ const ExploreScreen = () => {
          {
          id: 4,
             prenom: 'Sophie',
-            nom: 'Lambert',
+            nom: 'Lambert   ',
             matiere: 'SVT',
             photo: require('../assets/Sophie Lambert.jpg'),
             screenName: 'ItemSophieLambert' 
@@ -44,7 +38,7 @@ const ExploreScreen = () => {
          {
          id: 5,
             prenom: 'Antoine',
-            nom: 'Martin',
+            nom: 'Martin   ',
             matiere: 'Physique',
             photo: require('../assets/AntoineMartin.jpg'),
             screenName: 'ItemAntoineMartin' 
@@ -52,7 +46,7 @@ const ExploreScreen = () => {
          {
          id: 6,
             prenom: 'Clément',
-            nom: 'Fournier',
+            nom: 'Fournier  ',
             matiere: 'Chimie',
             photo: require('../assets/Clement Fournier.jpg'),
             screenName: 'ItemClementFournier' 
@@ -60,7 +54,7 @@ const ExploreScreen = () => {
          {
          id: 7,
             prenom: 'Isabelle',
-            nom: 'Leblanc',
+            nom: 'Leblanc   ',
             matiere: 'Biologie',
             photo: require('../assets/Isabelle Leblanc.jpg'),
             screenName: 'ItemIsabelleLeBlanc' 
@@ -68,7 +62,7 @@ const ExploreScreen = () => {
          {
          id: 8,
             prenom: 'Jonas',
-            nom: 'Mahi',
+            nom: 'Mahi  ',
             matiere: 'Philosophie',
             photo: require('../assets/Jonas Mahi.jpg'),
             screenName: 'ItemJonasMahi'
@@ -77,7 +71,7 @@ const ExploreScreen = () => {
          {
          id: 10,
             prenom: 'Nicolas',
-            nom: 'Dupuis',
+            nom: 'Dupuis  ',
             matiere: 'Anglais',
             photo: require('../assets/Nicolas Dupuis.jpg'),
             screenName: 'ItemNicolasDupuis' 
@@ -85,7 +79,7 @@ const ExploreScreen = () => {
          {
          id: 11,
             prenom: 'Lea',
-            nom: 'Moureau',
+            nom: 'Moureau  ',
             matiere: 'Théatre',
             photo: require('../assets/Lea Moureau.jpg'),
             screenName: 'ItemLeaMoreau'
@@ -113,48 +107,37 @@ const ExploreScreen = () => {
             matiere: 'Education Physique',
             photo: require('../assets/Vincent Laurent.jpg'),
             screenName: 'ItemVincentLaurent'
-        },
-        
-        
+        }, 
+    
+];
 
-    ];
-    const filteredProfessors = professorsData.filter((prof) => {
-        const fullName = `${prof.prenom} ${prof.nom}`.toLowerCase();
-        return fullName.includes(searchQuery.toLowerCase());
-    });
+const ProfessorItem = ({ item, onPress }) => (
+    
+    <TouchableOpacity onPress={() => onPress(item)} style={styles.professorContainer}>
+        <Image source={item.photo} style={styles.professorPhoto} />
+        <View style={styles.professorInfo}>
+        
+            <Text style={styles.professorName}>{item.prenom} {item.nom}</Text>
+            <Text style={styles.professorSubject}>{item.matiere}</Text>
+        </View>
+    </TouchableOpacity>
+);
 
+const ProfessorList = ({navigation}) => {
     const handlePress = (prof) => {
-        navigation.navigate(prof.screenName);
+
     };
 
     return (
         <View style={styles.container}>
-          
-            <View style={styles.searchContainer}>
-                <Ionicons name="search" size={24} color="#BA68C8" style={styles.searchIcon} />
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Rechercher un professeur..."
-                    onChangeText={setSearchQuery}
-                    value={searchQuery}
-                />
-            </View>
-
-           
             <FlatList
-                data={filteredProfessors}
+                data={professorsData}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => handlePress(item)} style={styles.professorContainer}>
-                      
-                        <Image source={item.photo} style={styles.professorPhoto} />
-
-                        <View style={styles.professorInfo}>
-                            <Text style={styles.professorName}>{item.prenom} {item.nom}</Text>
-                            <Text style={styles.professorSubject}>{item.matiere}</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <ProfessorItem item={item} onPress={handlePress} />
                 )}
+                horizontal
+                
             />
         </View>
     );
@@ -162,42 +145,26 @@ const ExploreScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 16,
-    },
-    searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 16,
-        borderWidth: 1,
-        backgroundColor:'#f4f5f7',
-        borderColor:'#BA68C8',
-        borderRadius: 30,
-        padding: 8,
-        marginTop:35,
-    },
-    searchIcon: {
-        marginRight: 8,
-    },
-    searchBar: {
-        flex: 1,
-        height: 30,
+        padding: 10,
+        margin:-12,
     },
     professorContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        marginBottom: 16,
+        
     },
     professorPhoto: {
         width: 50,
         height: 50,
         borderRadius: 25,
-        marginRight: 16,
+        marginRight: 10,
+        
+        
     },
     professorInfo: {
         flex: 1,
+        
     },
     professorName: {
         fontSize: 16,
@@ -209,10 +176,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ExploreScreen;
-
-
-
-
-
+export default ProfessorList;
 

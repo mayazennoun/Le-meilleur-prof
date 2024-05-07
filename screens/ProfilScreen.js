@@ -3,20 +3,18 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import useAuth from '../hooks/useAuth'; // Assurez-vous que votre hook useAuth est bien importé
+import useAuth from '../hooks/useAuth'; 
 
-// Importez l'image de profil depuis votre dossier d'assets
- // Remplacez par le chemin correct de votre image
+
 
 const ProfilScreen = ({navigation}) => {
-    // Utilisez le hook useAuth pour obtenir l'utilisateur actuel
+    
     const { user } = useAuth();
 
-    // Fonction de déconnexion
     const handleLogout = async () => {
         try {
             await auth.signOut();
-            // Vous pouvez ajouter des actions supplémentaires après la déconnexion ici
+           
             console.log('Déconnexion réussie');
         } catch (error) {
             console.error('Erreur lors de la déconnexion :', error);
@@ -25,20 +23,20 @@ const ProfilScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            {/* Afficher la photo de profil de l'utilisateur depuis les assets */}
+            
             <Image
                 source={require('../assets/avatar.png.jpg')}
                 style={styles.profileImage}
             />
             
-            {/* Afficher l'email de l'utilisateur */}
+            {}
             {user && (
                 <Text style={styles.userEmail}>
                     Bienvenue ! {'\n'} {user.email}
                 </Text>
             )}
 
-            {/* Options de profil */}
+           
             <TouchableOpacity style={styles.option} onPress={() => { navigation.navigate('MonProfile') }}>
                 <FontAwesome name="user" size={29} color="#BA68C8" />
                 <Text style={styles.text}>Mon profil</Text>
@@ -49,12 +47,12 @@ const ProfilScreen = ({navigation}) => {
                 <Text style={styles.text}>Mes favoris</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.option} onPress={() => { /* Ajoutez votre logique ici */ }}>
+            <TouchableOpacity style={styles.option} onPress={() => {  }}>
                 <FontAwesome name="book" size={29} color="#BA68C8" />
                 <Text style={styles.text}>Mes cours</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.option} onPress={() => { /* Ajoutez votre logique ici */ }}>
+            <TouchableOpacity style={styles.option} onPress={() => {  }}>
                 <FontAwesome name="credit-card" size={29} color="#BA68C8" />
                 <Text style={styles.text}>Mes paiements</Text>
             </TouchableOpacity>
@@ -83,21 +81,21 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 50,
         alignSelf: 'center',
-        marginBottom: 20, // Pour ajouter de l'espace entre la photo et l'email
+        marginBottom: 20, 
     },
     userEmail: {
         textAlign: 'center',
         fontSize: 18,
         fontWeight: 'bold',
         color: 'black',
-        marginBottom: 20, // Pour ajouter de l'espace entre l'email et les options de profil
+        marginBottom: 20,
     },
     option: {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 10,
         marginVertical: 5,
-        marginHorizontal: -30, // Ajustez la marge selon votre conception
+        marginHorizontal: -30, 
     },
     text: {
         marginLeft: 10,

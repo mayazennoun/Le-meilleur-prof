@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; // Pour l'icône de recherche
+import { AntDesign } from '@expo/vector-icons'; 
 
 const SearchBar = ({ onSearch, onFilter }) => {
-    // État pour gérer la valeur de recherche et l'option sélectionnée
+    
     const [searchValue, setSearchValue] = useState('');
     const [courseOption, setCourseOption] = useState(null);
 
-    // Fonction pour gérer la modification de la valeur de recherche
+   
     const handleSearchChange = (text) => {
         setSearchValue(text);
-        onSearch(text); // Appelez la fonction de recherche passée en props
+        onSearch(text);
     };
 
-    // Fonction pour gérer la sélection de l'option de cours
+  
     const handleCourseOptionSelect = (option) => {
         setCourseOption(option);
-        onFilter(option); // Appelez la fonction de filtre passée en props
+        onFilter(option);
     };
 
     return (
         <View style={styles.container}>
-            {/* Barre de recherche */}
+          
             <View style={styles.searchContainer}>
                 <AntDesign name="search1" size={20} color="gray" style={styles.searchIcon} />
                 <TextInput
@@ -32,7 +32,7 @@ const SearchBar = ({ onSearch, onFilter }) => {
                 />
             </View>
 
-            {/* Options de cours */}
+          
             <View style={styles.optionsContainer}>
                 <TouchableOpacity
                     style={[
@@ -60,9 +60,9 @@ const SearchBar = ({ onSearch, onFilter }) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50, // Ajustez la marge supérieure pour centrer la barre de recherche au milieu de l'écran
-        justifyContent: 'center', // Centre les éléments verticalement
-        alignItems: 'center', // Centre les éléments horizontalement
+        marginTop: 30,
+        justifyContent: 'center', 
+        alignItems: 'center', 
         flexDirection: 'column',
     },
     searchContainer: {

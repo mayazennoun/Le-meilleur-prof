@@ -1,24 +1,44 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
-
-const CreerAnnonceProfesseur = () => {
+import firebase from '../config/firebase'
+import { Firestore } from '@firebase/firestore';
+const CreateProfileScreen = () => {
+   const [nom, setNom] = useState('');
   const [titre, setTitre] = useState('');
   const [description, setDescription] = useState('');
   const [matiere, setMatiere] = useState('');
   const [tarif, setTarif] = useState('');
   const [adresse, setAdresse] = useState('');
-  const [image, setImage] = useState(null); // Ajout de l'état pour l'image
+  const [image, setImage] = useState(null); 
 
-  const handleSubmit = () => {
-    // Envoyer les données à la base de données ou effectuer une autre action
-    console.log('Titre:', titre);
-    console.log('Description:', description);
-    console.log('Matière:', matiere);
-    console.log('Tarif:', tarif);
-    console.log('Adresse:', adresse);
-    console.log('Image:', image); // Log l'image sélectionnée
-  };
 
+const handleSubmit = async () => {
+  try {
+    // Ajouter un nouveau document à la collection "prof"
+    await firebase.firestore.collection('prof').add({
+      nom,
+      titre,
+      description,
+      matiere,
+      tarif,
+      adresse,
+    });
+
+    // Réinitialiser les champs du formulaire
+    setNom('');
+    setTitre('');
+    setDescription('');
+    setMatiere('');
+    setTarif('');
+    setAdresse('');
+
+    // Afficher un message de succès ou effectuer d'autres actions si nécessaire
+    console.log('Document ajouté avec succès !');
+  } catch (error) {
+    // Gérer les erreurs
+    console.error('Erreur lors de l\'ajout du document :', error);
+  }
+};
   const selectImage = () => {
     // Code pour sélectionner une image à partir de la galerie ou prendre une nouvelle photo
     // Vous pouvez utiliser une librairie comme react-native-image-picker pour cela
@@ -37,6 +57,12 @@ const CreerAnnonceProfesseur = () => {
           </View>
         )}
       </TouchableOpacity>
+        <TextInput
+        style={styles.input}
+        value={nom}
+        onChangeText={setNom}
+        placeholder=" Nom Prenom"
+      />
       <TextInput
         style={styles.input}
         value={titre}
@@ -139,7 +165,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreerAnnonceProfesseur;
+export default CreateProfileScreen;
 
 
 

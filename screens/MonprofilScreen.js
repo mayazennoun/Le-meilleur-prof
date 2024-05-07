@@ -7,7 +7,6 @@ import useAuth from '../hooks/useAuth';
 const MonprofilScreen = () => {
   const navigation = useNavigation();
 
-    // Utilisez le hook useAuth pour obtenir l'utilisateur actuel
     const { user } = useAuth();
 
   return (
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     
   },
   header: {
-    height: 200, // Ajustez en fonction de vos besoins
+    height: 200, 
     backgroundColor: '#EBDEF0',
     justifyContent: 'center',
     alignItems: 'center',

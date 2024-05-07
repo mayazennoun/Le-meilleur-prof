@@ -1,21 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet ,TouchableOpacity,Image} from 'react-native';
-import useAuth from '../hooks/useAuth';; // Remplacez par le chemin de votre hook useAuth
+import useAuth from '../hooks/useAuth';
+import { useNavigation } from '@react-navigation/native';
 
-const HeaderHomeScreen = ({navigation}) => {
-    // Utilisez useAuth pour obtenir l'utilisateur actuellement connecté
+const HeaderHomeScreen = () => {
+    
     const { user } = useAuth();
     
 
     return (
         <View style={styles.container}>
-            {/* Si l'utilisateur est connecté, affichez son email */}
+           
             {user ? (
                 <View style={styles.header}>
                 <Text style={styles.title}> Bienvenue ! {'\n'} {user.email} </Text>
-                <TouchableOpacity onPress={() => navigation.navigate("Profil")}>
+                <TouchableOpacity >
                         <Image
-                            source={require("../assets/avatar.png.jpg")} // Remplacez par le chemin de votre image de profil
+                            source={require("../assets/avatar.png.jpg")} 
                             style={styles.profileImage}
                         />
                     </TouchableOpacity>
@@ -23,7 +24,7 @@ const HeaderHomeScreen = ({navigation}) => {
             ) : (
                 <Text style={styles.title}>Bienvenue, Invité !</Text>
             )}
-            {/* Ajoutez d'autres éléments d'interface utilisateur de votre écran d'accueil ici */}
+          
         </View>
         
     );
@@ -37,9 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f0f0',
     },
      header: {
-        flexDirection: 'row', // Les éléments sont disposés en ligne
-         // Aligne les éléments verticalement
-     // Ajoutez un espacement entre le header et les autres éléments
+        flexDirection: 'row',   
     },
 
     title: {
@@ -51,12 +50,12 @@ const styles = StyleSheet.create({
         color: 'black',
     },
       profileImage: {
-        width: 40, // Ajustez la taille de l'image de profil
+        width: 40, 
         height: 40,
         borderRadius: 20,
         marginLeft:160,
         marginTop:18,
-      // Rendre l'image ronde
+      
     },
 });
 

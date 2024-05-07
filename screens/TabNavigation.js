@@ -16,40 +16,40 @@ const TabNavigation = () => {
    }}>
     <Tab.Screen name="Homee" component={HomeScreen}
     options={{
-        tabBarLabel:({color})=>(
-            <Text style={{color:'#BA68C8',fontSize:12,marginTop:-7}}> Home</Text>
+        tabBarLabel:({focused, color })=>(
+            <Text style={{color: focused ? '#BA68C8' : 'black',fontSize:12,marginTop:-7}}> Home</Text>
         ),
-        tabBarIcon:()=>(
-       <FontAwesome name="home" size={24} color="#BA68C8" />
+        tabBarIcon:({focused})=>(
+       <FontAwesome name="home" size={24} color={focused ? '#BA68C8' : 'black'} />
         )
 
     }} />
       <Tab.Screen name="Explore" component={ExploreScreen}
     options={{
-        tabBarLabel:({color})=>(
-            <Text style={{color:'#BA68C8',fontSize:12,marginTop:-7}}>Explore</Text>
+        tabBarLabel:({focused, color })=>(
+            <Text style={{color: focused ? '#BA68C8' : 'black',fontSize:12,marginTop:-7}}>Explore</Text>
         ),
-        tabBarIcon:()=>(
-      <FontAwesome name="search" size={24} color="#BA68C8" />
+        tabBarIcon:({focused})=>(
+      <FontAwesome name="search" size={24} color={focused ? '#BA68C8' : 'black'} />
         )
     }} />
       <Tab.Screen name="Create" component={CreateProfileScreen}
     options={{
-        tabBarLabel:({color})=>(
-            <Text style={{color:'#BA68C8',fontSize:12,marginTop:-7}}>Create Profil</Text>
+        tabBarLabel:({focused, color })=>(
+            <Text style={{color: focused ? '#BA68C8' : 'black',fontSize:12,marginTop:-7}}>Create Profil</Text>
         ),
-        tabBarIcon:()=>(
-      <FontAwesome name="user-plus" size={24} color="#BA68C8" />
+        tabBarIcon:({focused})=>(
+      <FontAwesome name="user-plus" size={24} color={focused ? '#BA68C8' : 'black'} />
         )
     }} />
   
     <Tab.Screen name="Profil" component={ProfilScreen}
     options={{
-        tabBarLabel:({color})=>(
-            <Text style={{color:'#BA68C8',fontSize:12,marginTop:-7}}> Profil</Text>
+        tabBarLabel:({focused, color })=>(
+            <Text style={{color: focused ? '#BA68C8' : 'black',fontSize:12,marginTop:-7}}> Profil</Text>
         ),
-        tabBarIcon:()=>(
-      <FontAwesome name="user-circle" size={24} color="#BA68C8" />
+        tabBarIcon:({focused})=>(
+      <FontAwesome name="user-circle" size={24} color={focused ? '#BA68C8' : 'black'} />
         )
 
     }} />

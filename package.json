@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@clerk/clerk-expo": "^0.20.8",
+    "@firebase/firestore": "^4.6.1",
+    "@react-native-firebase/app": "^19.2.2",
+    "@react-native-firebase/firestore": "^19.2.2",
     "@react-native-picker/picker": "^2.7.5",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",

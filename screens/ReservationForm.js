@@ -11,7 +11,7 @@ const ReservationForm = () => {
   const navigation = useNavigation();
 
   const handleSubmit = () => {
-    // Logique pour envoyer la demande de réservation
+   
     console.log('Mode:', mode);
     console.log('Adresse:', address);
     console.log('Téléphone:', phone);
