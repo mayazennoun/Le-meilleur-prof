@@ -28,6 +28,7 @@ import VincentLaurentScreen from './screens/VincentLaurentScreen';
 import CarteCadeauPage from './screens/CarteCadeauPage';
 
 import ExploreScreen from './screens/ExploreScreen';
+import ReservationsList from './screens/ReservationsList';
 
 
 
@@ -63,6 +64,7 @@ export default function App() {
   <Stack.Screen name='MonProfile' component={MonprofilScreen}/>
   <Stack.Screen name='Explore' component={ExploreScreen}/>
   <Stack.Screen name='MProfil' component={ProfilScreen}/>
+  <Stack.Screen name='ListReservation' component={ReservationsList}/>
  
   </Stack.Navigator>
 </NavigationContainer>

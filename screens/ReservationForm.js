@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Alert, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import {app,db,getFirestore,collection, addDoc} from '../config/firebase'
+
 
 const ReservationForm = () => {
   const [mode, setMode] = useState('');
@@ -10,80 +12,94 @@ const ReservationForm = () => {
   const [cardNumber, setCardNumber] = useState('');
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
-   
-    console.log('Mode:', mode);
-    console.log('Adresse:', address);
-    console.log('Téléphone:', phone);
-    console.log('Numéro de carte:', cardNumber);
-  };
+  const handleSubmit = async () => {
+ try {
+  const docRef = await addDoc(collection(db, "ReservationCours"), {
+     mode: mode,
+      adresse: address,
+      numtel: phone,
+      numcard:cardNumber,
+      
+  });
+  Alert.alert("Document écrit avec ID: ", docRef.id);
+   setMode('');
+      setAddress('');
+      setPhone('');
+      setCardNumber('');
+    
+} catch (e) {
+  console.error("Erreur lors de l/'ajout de document : ", e);
+}
+};
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <Image source={require('../assets/teacheronline.png')} style={styles.image} />
+    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <Image source={require('../assets/teacheronline.png')} style={styles.image} />
 
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>Réserver votre place</Text>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#fff" />
-        </TouchableOpacity>
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Réserver votre place</Text>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
 
-        <View style={styles.section}>
-          <Text style={styles.label}></Text>
-          <View style={styles.modeContainer}>
-            <TouchableOpacity
-              style={[styles.modeButton, mode === 'face' && styles.selectedMode]}
-              onPress={() => setMode('face')}
-            >
-              <Ionicons name="person" size={24} color={mode === 'face' ? '#fff' : '#BA68C8'} />
-              <Text style={[styles.modeText, mode === 'face' && styles.selectedModeText]}>Face à face</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.modeButton, mode === 'webcam' && styles.selectedMode]}
-              onPress={() => setMode('webcam')}
-            >
-              <Ionicons name="videocam" size={24} color={mode === 'webcam' ? '#fff' : '#BA68C8'} />
-              <Text style={[styles.modeText, mode === 'webcam' && styles.selectedModeText]}>Webcam</Text>
-            </TouchableOpacity>
+          <View style={styles.section}>
+            <Text style={styles.label}></Text>
+            <View style={styles.modeContainer}>
+              <TouchableOpacity
+                style={[styles.modeButton, mode === 'face' && styles.selectedMode]}
+                onPress={() => setMode('face')}
+              >
+                <Ionicons name="person" size={24} color={mode === 'face' ? '#fff' : '#BA68C8'} />
+                <Text style={[styles.modeText, mode === 'face' && styles.selectedModeText]}>Face à face</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.modeButton, mode === 'webcam' && styles.selectedMode]}
+                onPress={() => setMode('webcam')}
+              >
+                <Ionicons name="videocam" size={24} color={mode === 'webcam' ? '#fff' : '#BA68C8'} />
+                <Text style={[styles.modeText, mode === 'webcam' && styles.selectedModeText]}>Webcam</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
 
-        <View style={styles.section}>
-          <Text style={styles.label}>Adresse de l'élève</Text>
-          <TextInput
-            style={styles.input}
-            value={address}
-            onChangeText={setAddress}
-            placeholder="Entrez votre adresse"
-          />
-        </View>
+          <View style={styles.section}>
+            <Text style={styles.label}>Adresse de l'élève</Text>
+            <TextInput
+              style={styles.input}
+              value={address}
+              onChangeText={setAddress}
+              placeholder="Entrez votre adresse"
+            />
+          </View>
 
-        <View style={styles.section}>
-          <Text style={styles.label}>Numéro de téléphone</Text>
-          <TextInput
-            style={styles.input}
-            value={phone}
-            onChangeText={setPhone}
-            placeholder="Entrez votre numéro"
-            keyboardType="phone-pad"
-          />
-        </View>
+          <View style={styles.section}>
+            <Text style={styles.label}>Numéro de téléphone</Text>
+            <TextInput
+              style={styles.input}
+              value={phone}
+              onChangeText={setPhone}
+              placeholder="Entrez votre numéro"
+              keyboardType="phone-pad"
+            />
+          </View>
 
-        <View style={styles.section}>
-          <Text style={styles.label}>Moyen de paiement</Text>
-          <TextInput
-            style={styles.input}
-            value={cardNumber}
-            onChangeText={setCardNumber}
-            placeholder="Numéro de carte"
-            keyboardType="numeric"
-          />
-        </View>
+          <View style={styles.section}>
+            <Text style={styles.label}>Moyen de paiement</Text>
+            <TextInput
+              style={styles.input}
+              value={cardNumber}
+              onChangeText={setCardNumber}
+              placeholder="Numéro de carte"
+              keyboardType="numeric"
+            />
+          </View>
 
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitButtonText}>Envoyer une demande</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+            <Text style={styles.submitButtonText}>Envoyer une demande</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -93,9 +109,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  scrollViewContainer: {
+    flexGrow: 1,
+  },
   image: {
     width: '100%',
-    marginTop:30,
+    marginTop: 30,
     height: 190,
     resizeMode: 'cover',
   },
@@ -159,7 +178,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 16,
     color: '#333',
-    backgroundColor:'#f3f4f6',
+    backgroundColor: '#f3f4f6',
   },
   submitButton: {
     backgroundColor: '#BA68C8',
@@ -175,5 +194,4 @@ const styles = StyleSheet.create({
 });
 
 export default ReservationForm;
-
 

@@ -16,10 +16,10 @@ const subjects = [
 ];
 
 const SubjectItem = ({ item }) => (
- 
   <View style={styles.subjectContainer}>
-  
-    <MaterialCommunityIcons name={item.icon} size={32} color="#BA68C8" style={styles.subjectIcon} />
+    <View style={styles.iconContainer}>
+      <MaterialCommunityIcons name={item.icon} size={32} color="#FFF" style={styles.subjectIcon} />
+    </View>
     <Text style={styles.subjectName}>{item.name}</Text>
   </View>
 );
@@ -38,11 +38,15 @@ const styles = StyleSheet.create({
   subjectContainer: {
     alignItems: 'center',
     padding: 10,
-    
+  },
+  iconContainer: {
+    backgroundColor: '#BA68C8',
+    padding: 8,
+    borderRadius: 50,
+    marginBottom: 5,
   },
   subjectIcon: {
     marginBottom: 5,
-    borderRadius:50,
   },
   subjectName: {
     fontSize: 14,

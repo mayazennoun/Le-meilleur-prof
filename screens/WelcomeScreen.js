@@ -8,7 +8,7 @@ const WelcomeScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#faf5ff' }}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ color: '#BA68C8', fontWeight: 'bold', fontSize: 24, textAlign: 'center',marginTop:50 }}>
-          Let's Get Started!
+           Commençons !
         </Text>
       </View>
       <View style={{ justifyContent: 'center', alignItems: 'center',marginBottom:25 }}>
@@ -28,13 +28,13 @@ const WelcomeScreen = ({ navigation }) => {
             margin:20,
           }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>
-            Sign Up
+            Inscription
           </Text>
         </TouchableOpacity>
         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
-          <Text>Already have an account ? </Text>
+          <Text>Vous avez déjà un compte ? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={{ color: '#BA68C8', fontWeight: 'bold' }}>Login</Text>
+            <Text style={{ color: '#BA68C8', fontWeight: 'bold' }}>Se connecter</Text>
           </TouchableOpacity>
         </View>
       </View>

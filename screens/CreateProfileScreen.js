@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView,Alert } from 'react-native';
 import firebase from '../config/firebase'
-import { Firestore } from '@firebase/firestore';
+import {app,db,getFirestore,collection, addDoc} from '../config/firebase'
+
 const CreateProfileScreen = () => {
    const [nom, setNom] = useState('');
   const [titre, setTitre] = useState('');
@@ -13,50 +14,32 @@ const CreateProfileScreen = () => {
 
 
 const handleSubmit = async () => {
-  try {
-    // Ajouter un nouveau document à la collection "prof"
-    await firebase.firestore.collection('prof').add({
-      nom,
-      titre,
-      description,
-      matiere,
-      tarif,
-      adresse,
-    });
-
-    // Réinitialiser les champs du formulaire
-    setNom('');
-    setTitre('');
-    setDescription('');
-    setMatiere('');
-    setTarif('');
-    setAdresse('');
-
-    // Afficher un message de succès ou effectuer d'autres actions si nécessaire
-    console.log('Document ajouté avec succès !');
-  } catch (error) {
-    // Gérer les erreurs
-    console.error('Erreur lors de l\'ajout du document :', error);
-  }
+ try {
+  const docRef = await addDoc(collection(db, "prof"), {
+     nom: nom,
+      titre: titre,
+      description: description,
+      matiere: matiere,
+      tarif: tarif,
+      adresse: adresse,
+  });
+  Alert.alert("Document écrit avec ID: ", docRef.id);
+   setNom('');
+      setTitre('');
+      setDescription('');
+      setMatiere('');
+      setTarif('');
+      setAdresse('');
+} catch (e) {
+  console.error("Erreur lors de l/'ajout de document : ", e);
+}
 };
-  const selectImage = () => {
-    // Code pour sélectionner une image à partir de la galerie ou prendre une nouvelle photo
-    // Vous pouvez utiliser une librairie comme react-native-image-picker pour cela
-    // Une fois l'image sélectionnée, mettez à jour l'état de l'image avec setImage
-  };
+
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Créez dès maintenant votre annonce !</Text>
-      <TouchableOpacity style={styles.imageContainer} onPress={selectImage}>
-        {image ? (
-          <Image source={{ uri: image }} style={styles.image} />
-        ) : (
-          <View style={styles.addImageButton}>
-            <Text style={styles.addImageText}>Ajouter une image</Text>
-          </View>
-        )}
-      </TouchableOpacity>
+    
         <TextInput
         style={styles.input}
         value={nom}

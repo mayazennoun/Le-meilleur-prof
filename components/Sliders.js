@@ -14,7 +14,7 @@ const SubjectItem = ({ item }) => (
   </View>
 );
 
-const Flat = () => (
+const Sliders = () => (
   <FlatList
     data={subjects}
     renderItem={({ item }) => <SubjectItem item={item} />}
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Flat;
+export default Sliders;

@@ -42,19 +42,11 @@ const ProfilScreen = ({navigation}) => {
                 <Text style={styles.text}>Mon profil</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.option} onPress={() => {   }}>
-                <FontAwesome name="star" size={29} color="#BA68C8" />
-                <Text style={styles.text}>Mes favoris</Text>
-            </TouchableOpacity>
+           
 
-            <TouchableOpacity style={styles.option} onPress={() => {  }}>
-                <FontAwesome name="book" size={29} color="#BA68C8" />
-                <Text style={styles.text}>Mes cours</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.option} onPress={() => {  }}>
+            <TouchableOpacity style={styles.option} onPress={() => { navigation.navigate('ListReservation') }}>
                 <FontAwesome name="credit-card" size={29} color="#BA68C8" />
-                <Text style={styles.text}>Mes paiements</Text>
+                <Text style={styles.text}>Mes réservations</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.option} onPress={() => {  navigation.navigate('Gift') }}>

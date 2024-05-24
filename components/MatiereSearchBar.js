@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, ScrollView, StyleSheet } from 'react-native';
-import Flat from '../components/Flat';
-import CategoriesHomeScreen from '../components/CategoriesHomeScreen';
-import ProfessorList from '../components/ProfessorList';
+
 
 const MatiereSearchBar = () => {
   const [selectedMatiere, setSelectedMatiere] = useState('');
