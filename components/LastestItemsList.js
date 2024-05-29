@@ -1,9 +1,29 @@
-import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
-import useFirestoreData from '../hooks/useFirestoreData'; // Importez le hook que nous avons créé précédemment
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 const LatestItemsList = () => {
-  const data = useFirestoreData(); // Utilisez le hook pour récupérer les données de Firestore
+  const [data, setData] = useState([]);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "Profs"));
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push({ id: doc.id, ...doc.data() });
+        });
+        setData(items);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des dernières annonces :", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <View style={{ marginTop: 16 }}>
@@ -12,15 +32,15 @@ const LatestItemsList = () => {
         data={data}
         horizontal
         renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Image
-              source={item.imageURL ? { uri: item.imageURL } : require('../assets/9434619.jpg')}
-              style={styles.image}
-            />
-            <Text style={styles.title}>{item.nom} {item.prenom}</Text>
-          </View>
+          <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('Reservation', { itemId: item.id })}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <View>
+              <Text style={styles.title}>{item.titre}</Text>
+              <Text style={styles.subtitle}>{item.nom} {item.prenom}</Text>
+            </View>
+          </TouchableOpacity>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()}
         showsHorizontalScrollIndicator={false}
       />
     </View>
@@ -29,30 +49,32 @@ const LatestItemsList = () => {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    width: 150, // Ajuster la largeur des éléments
+    width: 250,
     margin: 8,
     padding: 8,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#64C4C3',
     backgroundColor: '#FFFFFF',
+    flexDirection: 'row',
     alignItems: 'center',
   },
   image: {
     width: 100,
     height: 100,
+    resizeMode: 'cover',
     borderRadius: 50,
-    marginBottom: 8,
+    marginRight: 8,
   },
   title: {
     fontSize: 15,
     fontWeight: 'bold',
-    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 12,
+    marginTop: 4,
   },
 });
 
 export default LatestItemsList;
-
-
-
 

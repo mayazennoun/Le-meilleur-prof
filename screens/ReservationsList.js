@@ -1,77 +1,56 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
-const ReservationsList = () => {
+const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
     const fetchReservations = async () => {
-      try {
-        const storedReservations = await AsyncStorage.multiGet([
-          'mode',
-          'address',
-          'phone',
-          'cardNumber',
-        ]);
-
-        const reservationsData = storedReservations.map(([key, value]) => ({
-          key,
-          value,
-        }));
-
-        setReservations(reservationsData);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des réservations :', error);
-      }
+      const querySnapshot = await getDocs(collection(db, 'ReservationCours'));
+      const reservationsData = [];
+      querySnapshot.forEach((doc) => {
+        reservationsData.push({ ...doc.data(), id: doc.id });
+      });
+      setReservations(reservationsData);
     };
-
     fetchReservations();
   }, []);
 
-  const renderReservation = ({ item }) => (
-    <View style={styles.reservationContainer}>
-      <View style={styles.iconContainer}>
-        <Ionicons
-          name={
-            item.key === 'mode'
-              ? item.value === 'face'
-                ? 'person'
-                : 'videocam'
-              : item.key === 'address'
-              ? 'location'
-              : item.key === 'phone'
-              ? 'call'
-              : 'card'
-          }
-          size={24}
-          color="#BA68C8"
-        />
-      </View>
-      <View style={styles.detailsContainer}>
-        <Text style={styles.label}>
-          {item.key === 'mode'
-            ? 'Mode'
-            : item.key === 'address'
-            ? 'Adresse'
-            : item.key === 'phone'
-            ? 'Téléphone'
-            : 'Numéro de carte'}
-        </Text>
-        <Text style={styles.value}>{item.value}</Text>
-      </View>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Mes réservations</Text>
+      <Text style={styles.title}>Liste des Réservations</Text>
       <FlatList
         data={reservations}
-        renderItem={renderReservation}
-        keyExtractor={(item) => item.key}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>Réservation</Text>
+            </View>
+            <View style={styles.cardContent}>
+              <View style={styles.infoRow}>
+                <Ionicons name="person" size={24} color="#4CAF50" />
+                <Text style={styles.infoText}>{item.mode}</Text>
+              </View>
+              <View style={styles.infoRow}>
+                <Ionicons name="location" size={24} color="#FF5722" />
+                <Text style={styles.infoText}>{item.adresse}</Text>
+              </View>
+              <View style={styles.infoRow}>
+                <Ionicons name="call" size={24} color="#03A9F4" />
+                <Text style={styles.infoText}>{item.numtel}</Text>
+              </View>
+              <View style={styles.infoRow}>
+                <Ionicons name="card" size={24} color="#9C27B0" />
+                <Text style={styles.infoText}>{item.numcard}</Text>
+              </View>
+            </View>
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContainer}
       />
     </View>
   );
@@ -79,45 +58,53 @@ const ReservationsList = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:35,
     flex: 1,
+    backgroundColor: '#E7F6FD',
     padding: 16,
-    backgroundColor: '#fff',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
+    textAlign: 'center',
     color: '#333',
   },
-  reservationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#f9f9f9',
+  listContainer: {
+    paddingBottom: 16,
+  },
+  card: {
+    backgroundColor: '#FFF',
     borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 5,
   },
-  iconContainer: {
-    backgroundColor: '#f2f2f2',
-    padding: 12,
-    borderRadius: 24,
-    marginRight: 16,
+  cardHeader: {
+    marginBottom: 16,
   },
-  detailsContainer: {
-    flex: 1,
-  },
-  label: {
+  cardTitle: {
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
   },
-  value: {
-    marginTop: 4,
-    color: '#666',
+  cardContent: {
+    flexDirection: 'column',
   },
-  separator: {
-    height: 1,
-    backgroundColor: '#e0e0e0',
-    marginVertical: 8,
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  infoText: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: '#333',
   },
 });
 
-export default ReservationsList;
+export default ReservationList;

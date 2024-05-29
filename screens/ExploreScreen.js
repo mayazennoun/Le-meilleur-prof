@@ -1,4 +1,4 @@
-// screens/ExploreScreen.js
+
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Alert } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
@@ -11,7 +11,7 @@ const ExploreScreen = () => {
 
   const fetchData = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'prof'));
+      const querySnapshot = await getDocs(collection(db, 'Profs'));
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push({ id: doc.id, ...doc.data() });

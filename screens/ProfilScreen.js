@@ -4,31 +4,22 @@ import { FontAwesome } from '@expo/vector-icons';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import useAuth from '../hooks/useAuth'; 
-
-
-
-const ProfilScreen = ({navigation}) => {
-    
+const ProfilScreen = ({navigation}) => {  
     const { user } = useAuth();
-
     const handleLogout = async () => {
         try {
-            await auth.signOut();
-           
+            await auth.signOut();      
             console.log('Déconnexion réussie');
         } catch (error) {
             console.error('Erreur lors de la déconnexion :', error);
         }
     };
-
     return (
-        <View style={styles.container}>
-            
+        <View style={styles.container}>        
             <Image
                 source={require('../assets/9439726.jpg')}
                 style={styles.profileImage}
             />
-            
             {}
             {user && (
                 <Text style={styles.userEmail}>
