@@ -1,1 +1,1 @@
-PS pour l'encadrant : on veux bien rajouter une fonctionnalite pour le homescreeen une barre de recherche qui filtre les matieres le tarif et la localisaton en utilisant le MAP et ses API  (On parle de HomeScreen.js)
+
