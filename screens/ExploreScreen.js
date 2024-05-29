@@ -1,212 +1,45 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+// screens/ExploreScreen.js
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Alert } from 'react-native';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../config/firebase';
+
+import AnnonceList from './AnnonceList';
 
 const ExploreScreen = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const navigation = useNavigation();
+  const [data, setData] = useState([]);
 
-  
-    const professorsData = [
-        {
-            id: 1,
-            prenom: 'Jean',
-            nom: 'Dupont',
-            matiere: 'Mathématiques',
-            photo: require('../assets/profDupontPhoto .jpg'),
-            screenName: 'ItemJeanDupont'
-        },
-        {
-            id: 2,
-            prenom: 'Marie',
-            nom: 'Martin',
-            matiere: 'Français',
-            photo: require('../assets/MarieMartin.jpg'),
-            screenName: 'ItemMarieMartin'
-        },
-        {
-         id: 3,
-            prenom: 'Pierre',
-            nom: 'Bernard',
-            matiere: 'Histoire',
-            photo: require('../assets/Pierre Bernard.jpg'),
-            screenName: 'ItemPierreBernard' 
-        },
-         {
-         id: 4,
-            prenom: 'Sophie',
-            nom: 'Lambert',
-            matiere: 'SVT',
-            photo: require('../assets/Sophie Lambert.jpg'),
-            screenName: 'ItemSophieLambert' 
-        },
-         {
-         id: 5,
-            prenom: 'Antoine',
-            nom: 'Martin',
-            matiere: 'Physique',
-            photo: require('../assets/AntoineMartin.jpg'),
-            screenName: 'ItemAntoineMartin' 
-        },
-         {
-         id: 6,
-            prenom: 'Clément',
-            nom: 'Fournier',
-            matiere: 'Chimie',
-            photo: require('../assets/Clement Fournier.jpg'),
-            screenName: 'ItemClementFournier' 
-        },
-         {
-         id: 7,
-            prenom: 'Isabelle',
-            nom: 'Leblanc',
-            matiere: 'Biologie',
-            photo: require('../assets/Isabelle Leblanc.jpg'),
-            screenName: 'ItemIsabelleLeBlanc' 
-        },
-         {
-         id: 8,
-            prenom: 'Jonas',
-            nom: 'Mahi',
-            matiere: 'Philosophie',
-            photo: require('../assets/Jonas Mahi.jpg'),
-            screenName: 'ItemJonasMahi'
-        },
-       
-         {
-         id: 10,
-            prenom: 'Nicolas',
-            nom: 'Dupuis',
-            matiere: 'Anglais',
-            photo: require('../assets/Nicolas Dupuis.jpg'),
-            screenName: 'ItemNicolasDupuis' 
-        },
-         {
-         id: 11,
-            prenom: 'Lea',
-            nom: 'Moureau',
-            matiere: 'Théatre',
-            photo: require('../assets/Lea Moureau.jpg'),
-            screenName: 'ItemLeaMoreau'
-        },
-         {
-         id: 12,
-            prenom: 'Jules',
-            nom: 'Abidi',
-            matiere: 'Latin',
-            photo: require('../assets/Jules Abidi.jpg'),
-            screenName: 'ItemJulesAbidi' 
-        },
-         {
-         id: 13,
-            prenom: 'Sandrine',
-            nom: 'Phore',
-            matiere: 'Arabe',
-            photo: require('../assets/Sandrine Phore.jpg'),
-            screenName: 'ItemSandrinePhore' 
-        },
-         {
-         id: 14,
-            prenom: 'Vincent',
-            nom: 'Laurent',
-            matiere: 'Education Physique',
-            photo: require('../assets/Vincent Laurent.jpg'),
-            screenName: 'ItemVincentLaurent'
-        },
-        
-        
+  const fetchData = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'prof'));
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push({ id: doc.id, ...doc.data() });
+      });
+      setData(items);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données : ', error);
+      Alert.alert('Erreur', 'Erreur lors de la récupération des données');
+    }
+  };
 
-    ];
-    const filteredProfessors = professorsData.filter((prof) => {
-        const fullName = `${prof.prenom} ${prof.nom}`.toLowerCase();
-        return fullName.includes(searchQuery.toLowerCase());
-    });
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    const handlePress = (prof) => {
-        navigation.navigate(prof.screenName);
-    };
-
-    return (
-        <View style={styles.container}>
-          
-            <View style={styles.searchContainer}>
-                <Ionicons name="search" size={24} color="#BA68C8" style={styles.searchIcon} />
-                <TextInput
-                    style={styles.searchBar}
-                    placeholder="Rechercher un professeur..."
-                    onChangeText={setSearchQuery}
-                    value={searchQuery}
-                />
-            </View>
-
-           
-            <FlatList
-                data={filteredProfessors}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => handlePress(item)} style={styles.professorContainer}>
-                      
-                        <Image source={item.photo} style={styles.professorPhoto} />
-
-                        <View style={styles.professorInfo}>
-                            <Text style={styles.professorName}>{item.prenom} {item.nom}</Text>
-                            <Text style={styles.professorSubject}>{item.matiere}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )}
-            />
-        </View>
-    );
+  return (
+    <ScrollView style={styles.container}>
+      
+      <AnnonceList data={data} />
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-    searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 16,
-        borderWidth: 1,
-        backgroundColor:'#f4f5f7',
-        borderColor:'#BA68C8',
-        borderRadius: 30,
-        padding: 8,
-        marginTop:35,
-    },
-    searchIcon: {
-        marginRight: 8,
-    },
-    searchBar: {
-        flex: 1,
-        height: 30,
-    },
-    professorContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-    },
-    professorPhoto: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        marginRight: 16,
-    },
-    professorInfo: {
-        flex: 1,
-    },
-    professorName: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    professorSubject: {
-        fontSize: 14,
-        color: 'gray',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#E7F6FD',
+  },
 });
 
 export default ExploreScreen;

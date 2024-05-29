@@ -1,8 +1,8 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
-
+import Video from 'react-native-video';
 const subjects = [
-  { name: 'Arabe', image: require('../assets/LeMeilleurProf.jpg') },{ name: 'Théâtre', image: require('../assets/PP.jpg') }
+  { name: 'Arabe', image: require('../assets/1.jpg') },{ name: 'Théâtre', image: require('../assets/1.jpg') }
   
   
 ];

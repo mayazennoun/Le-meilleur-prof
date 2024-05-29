@@ -21,46 +21,46 @@ function SignupScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: '#faf5ff' }}>
-        <View className="flex-1 bg-[#faf5ff]">
+      <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: '#E7F6FD' }}>
+        <View className="flex-1 bg-[#64C4C3]">
           <SafeAreaView className="flex">
             <View className="flex-row justify-start">
               <TouchableOpacity
                 onPress={() => navigation.goBack()}
-                className="bg-[#BA68C8] rounded-tr-2xl ml-4 mt-8"
+                className="bg-[#E7F6FD] rounded-tr-2xl ml-4 mt-8"
               >
                 <Ionicons name="return-down-back-sharp" size={24} color="black" />
               </TouchableOpacity>
             </View>
             <View className="flex-row justify-center">
               <Image
-                source={require("../assets/typingbro.png")}
+                source={require("../assets/Online learning-pana.png")}
                 style={{ width: 200, height: 200 }}
               />
             </View>
           </SafeAreaView>
           <View
-            className="flex-1 bg-white px-8 pt-8"
+            className="flex-1 bg-[#E7F6FD] px-8 pt-8"
             style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
           >
             <View className="from space-y-2">
               <Text className="text-black ml-4">Nom d'utilisateur</Text>
               <TextInput
-                className="p-4 bg-[#f3f4f6] text-[#020202] rounded-[30px] mb-3"
+                className="p-4 bg-[#FFFFFF] text-[#020202] rounded-[30px] mb-3"
                 placeholder="Entrez votre Nom"
                 value={username}
                 onChangeText={(value) => setUsername(value)}
               />
               <Text className="text-black ml-4">Email Adresse</Text>
               <TextInput
-                className="p-4 bg-[#f3f4f6] text-[#040404] rounded-[30px] mb-3"
+                className="p-4 bg-[#FFFFFF] text-[#040404] rounded-[30px] mb-3"
                 value={email}
                 onChangeText={(value) => setEmail(value)}
                 placeholder="Entrez votre adresse email"
               />
               <Text className="text-black ml-4">Mot de passe</Text>
               <TextInput
-                className="p-4 bg-[#f3f4f6] text-[#030303] rounded-[30px]"
+                className="p-4 bg-[#FFFFFF] text-[#030303] rounded-[30px]"
                 secureTextEntry
                 value={password}
                 onChangeText={(value) => setPassword(value)}
@@ -68,7 +68,7 @@ function SignupScreen({ navigation }) {
               />
               <TouchableOpacity className="flex items-end mb-2"></TouchableOpacity>
               <TouchableOpacity
-                className="py-4 mt-10 bg-[#BA68C8] rounded-[30px]"
+                className="py-4 mt-10 bg-[#64C4C3] rounded-[30px]"
                 onPress={handleSubmit}
               >
                 <Text className="font-xl font-bold text-center text-white"> Inscription </Text>
@@ -77,7 +77,7 @@ function SignupScreen({ navigation }) {
             <View className="flex-row justify-center m-10 font-semibold ">
               <Text>Vous avez déjà un compte ? </Text>
               <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text className="text-[#BA68C8] font-semibold ">Connexion</Text>
+                <Text className="text-[#64C4C3] font-semibold ">Connexion</Text>
               </TouchableOpacity>
             </View>
           </View>

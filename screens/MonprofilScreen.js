@@ -49,7 +49,7 @@ const MonprofilScreen = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
-            <Image source={require('../assets/avatar.png.jpg')} style={styles.avatar} />
+            <Image source={require('../assets/9434619.jpg')} style={styles.avatar} />
           </View>
           {user && (
             <Text style={styles.userEmail}>
@@ -59,7 +59,7 @@ const MonprofilScreen = () => {
         </View>
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
-            <Ionicons name="person" size={24} color="#BA68C8" style={styles.icon} />
+            <Ionicons name="person" size={35} color="#64C4C3" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Full Name"
@@ -68,7 +68,7 @@ const MonprofilScreen = () => {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Ionicons name="location" size={24} color="#BA68C8" style={styles.icon} />
+            <Ionicons name="location" size={35} color="#64C4C3" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Address"
@@ -77,7 +77,7 @@ const MonprofilScreen = () => {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Ionicons name="logo-skype" size={24} color="#BA68C8" style={styles.icon} />
+            <Ionicons name="logo-skype" size={35} color="#64C4C3" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Skype ID"
@@ -86,7 +86,7 @@ const MonprofilScreen = () => {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Ionicons name="logo-google" size={24} color="#BA68C8" style={styles.icon} />
+            <Ionicons name="logo-google" size={35} color="#64C4C3" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Hangout ID"
@@ -95,7 +95,7 @@ const MonprofilScreen = () => {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Ionicons name="mail" size={24} color="#BA68C8" style={styles.icon} />
+            <Ionicons name="mail" size={35} color="#64C4C3" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Gmail"
@@ -104,7 +104,7 @@ const MonprofilScreen = () => {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Ionicons name="calendar" size={24} color="#BA68C8" style={styles.icon} />
+            <Ionicons name="calendar" size={35} color="#64C4C3" style={styles.icon} />
             <TextInput
               style={styles.input}
               placeholder="Date of Birth"
@@ -127,14 +127,15 @@ const MonprofilScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#E7F6FD',
+    marginTop:29,
   },
   scrollContainer: {
     flexGrow: 1,
   },
   header: {
     height: 200,
-    backgroundColor: '#EBDEF0',
+    backgroundColor: '#E7F6FD',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -163,16 +164,16 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 40,
+    height: 50,
     borderColor: 'transparent',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderRadius: 30,
     paddingHorizontal: 10,
   },
   saveButton: {
-    backgroundColor: '#BA68C8',
-    padding: 10,
+    backgroundColor: '#64C4C3',
+    padding: 20,
     borderRadius: 30,
     alignItems: 'center',
     marginTop: 20,
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     left: 20,
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#BA68C8',
+    backgroundColor: '#64C4C3',
   },
   userEmail: {
     fontWeight: 'bold',

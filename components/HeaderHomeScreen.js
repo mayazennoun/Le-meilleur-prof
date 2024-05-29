@@ -16,7 +16,7 @@ const HeaderHomeScreen = () => {
                 <Text style={styles.title}> Bienvenue ! {'\n'} {user.email} </Text>
                 <TouchableOpacity >
                         <Image
-                            source={require("../assets/avatar.png.jpg")} 
+                            source={require("../assets/9439726.jpg")} 
                             style={styles.profileImage}
                         />
                     </TouchableOpacity>
@@ -33,17 +33,16 @@ const HeaderHomeScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-       
-         
-        backgroundColor: '#f0f0f0',
+      marginTop:36,
     },
      header: {
         flexDirection: 'row',   
+        
     },
 
     title: {
         
-        marginTop:17,
+       
         margin:-20,
         fontSize: 15,
         fontWeight: 'bold',
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 20,
         marginLeft:160,
-        marginTop:18,
+        marginTop:-22,
       
     },
 });

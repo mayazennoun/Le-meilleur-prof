@@ -1,25 +1,26 @@
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import React from 'react';
+import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import useFirestoreData from '../hooks/useFirestoreData'; // Importez le hook que nous avons créé précédemment
 
-const LatestItemsList = ({ data }) => {
-  // Limiter les données à 8 éléments
-  const limitedData = data.slice(0, 8);
+const LatestItemsList = () => {
+  const data = useFirestoreData(); // Utilisez le hook pour récupérer les données de Firestore
 
   return (
     <View style={{ marginTop: 16 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Suggestions</Text>
+      <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Dernières annonces</Text>
       <FlatList
-        data={limitedData}
+        data={data}
         horizontal
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
-            <Image source={item.image} style={styles.image} />
-            <View>
-              <Text style={styles.title}>{item.title}</Text>
-            </View>
+            <Image
+              source={item.imageURL ? { uri: item.imageURL } : require('../assets/9434619.jpg')}
+              style={styles.image}
+            />
+            <Text style={styles.title}>{item.nom} {item.prenom}</Text>
           </View>
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item, index) => index.toString()}
         showsHorizontalScrollIndicator={false}
       />
     </View>
@@ -33,73 +34,25 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#ddd',
-    backgroundColor: '#fff',
+    borderColor: '#64C4C3',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
   },
   image: {
-    width: '100%',
+    width: 100,
     height: 100,
-    resizeMode: 'cover',
-    borderRadius: 8,
+    borderRadius: 50,
+    marginBottom: 8,
   },
   title: {
     fontSize: 15,
     fontWeight: 'bold',
-    marginTop: 8,
     textAlign: 'center',
   },
 });
 
 export default LatestItemsList;
 
-export const teacherData = [
-  {
-    id: 1,
-    title: 'Professeur de Mathématiques',
-    image: require('../assets/Jonas Mahi.jpg'), 
-  },
-  {
-    id: 2,
-    title: 'Professeur de Physique',
-    image: require('../assets/Isabelle Leblanc.jpg'),
-  },
-  {
-    id: 3,
-    title: 'Professeur de Français',
-    image: require('../assets/MarieMartin.jpg'),
-  },
-  {
-    id: 4,
-    title: 'Professeur de Chimie',
-    image: require('../assets/Clement Fournier.jpg'),
-  },
-  {
-    id: 5,
-    title: 'Professeur de SVT',
-    image: require('../assets/Sophie Lambert.jpg'),
-  },
-  {
-    id: 6,
-    title: 'Professeur d\'Histoire',
-    image: require('../assets/Pierre Bernard.jpg'),
-  },
-  {
-    id: 7,
-    title: 'Professeur d\'Anglais',
-    image: require('../assets/Nicolas Dupuis.jpg'),
-  },
-  {
-    id: 8,
-    title: 'Professeur de Philosophie',
-    image: require('../assets/Jonas Mahi.jpg'),
-  },
-  {
-    id: 9,
-    title: 'Professeur de Théâtre',
-    image: require('../assets/Lea Moureau.jpg'),
-  },
-  // Ajoutez d'autres enseignants ici si nécessaire
-];
+
 
 

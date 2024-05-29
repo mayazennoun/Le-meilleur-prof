@@ -25,7 +25,7 @@ const ProfilScreen = ({navigation}) => {
         <View style={styles.container}>
             
             <Image
-                source={require('../assets/avatar.png.jpg')}
+                source={require('../assets/9439726.jpg')}
                 style={styles.profileImage}
             />
             
@@ -38,24 +38,24 @@ const ProfilScreen = ({navigation}) => {
 
            
             <TouchableOpacity style={styles.option} onPress={() => { navigation.navigate('MonProfile') }}>
-                <FontAwesome name="user" size={29} color="#BA68C8" />
+                <FontAwesome name="user" size={29} color="#64C4C3" />
                 <Text style={styles.text}>Mon profil</Text>
             </TouchableOpacity>
 
            
 
             <TouchableOpacity style={styles.option} onPress={() => { navigation.navigate('ListReservation') }}>
-                <FontAwesome name="credit-card" size={29} color="#BA68C8" />
+                <FontAwesome name="credit-card" size={29} color="#64C4C3" />
                 <Text style={styles.text}>Mes réservations</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.option} onPress={() => {  navigation.navigate('Gift') }}>
-                <FontAwesome name="gift" size={35} color="#BA68C8" />
+                <FontAwesome name="gift" size={35} color="#64C4C3" />
                 <Text style={styles.text}>Carte cadeau</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.option} onPress={handleLogout}>
-                <FontAwesome name="sign-out" size={34} color="#BA68C8" />
+                <FontAwesome name="sign-out" size={34} color="#64C4C3" />
                 <Text style={styles.text}>Se déconnecter</Text>
             </TouchableOpacity>
         </View>
@@ -64,9 +64,11 @@ const ProfilScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 40,
-        backgroundColor: '#f0f0f0',
-        marginTop: 80,
+        flex:1,
+        padding: 10,
+        backgroundColor: '#E7F6FD',
+        marginTop:43,
+        
     },
     profileImage: {
         width: 100,
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         marginVertical: 5,
-        marginHorizontal: -30, 
+      
     },
     text: {
         marginLeft: 10,

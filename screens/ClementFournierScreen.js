@@ -31,13 +31,13 @@ const ClementFournierScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false} className="space-y-5">
         <View className="flex-row justify-between items-start"> 
         <Text style={{fontSize:15}} className="font-bold flex-1 ">Clement Fournier </Text>
-        <Text style={{fontSize:15}} className="text-[#BA68C8] font-bold"> 4000DA/Mois</Text>
+        <Text style={{fontSize:15}} className="text-[#64C4C3] font-bold"> 4000DA/Mois</Text>
         </View>
         <Text style={{fontSize:15}} className="tracking-wide mb-2">  Clément Fournier, enseignant en chimie, propose des leçons innovantes et stimulantes. Son engagement passionné pour la matière et son approche interactive inspirent les élèves à découvrir les concepts chimiques de manière captivante et significative.
 </Text>
        <View className="flex-row justify-between mx-1"> 
        <View className="flex-row space-x-2 items-start"> 
-       <FontAwesome name="clock-o" size={24} color="#AFA4CE" />
+       <FontAwesome name="clock-o" size={24} color="#64C4C3" />
        <View className="flex space-y-2"> 
        <Text className="font-bold">30 Jours</Text>
        <Text style={{fontSize:11}}>Duration </Text>
@@ -60,7 +60,7 @@ const ClementFournierScreen = () => {
        </View>
       </ScrollView>
       <TouchableOpacity onPress={() => navigation.navigate("Reservation")}
-       style={{backgroundColor:"#BA68C8",width:200,height:60}} className="mb-6 mx-auto flex justify-center items-center rounded-full">
+       style={{backgroundColor:"#64C4C3",width:200,height:60}} className="mb-6 mx-auto flex justify-center items-center rounded-full">
         <Text className="text-white font-bold" style={{fontSize:18}}> Reserver</Text>
       </TouchableOpacity>
      </View>

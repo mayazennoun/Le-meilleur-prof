@@ -5,15 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#faf5ff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#E7F6FD' }}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ color: '#BA68C8', fontWeight: 'bold', fontSize: 24, textAlign: 'center',marginTop:50 }}>
+        <Text style={{ color: '#64C4C3', fontWeight: 'bold', fontSize: 24, textAlign: 'center',marginTop:50 }}>
            Commençons !
         </Text>
       </View>
       <View style={{ justifyContent: 'center', alignItems: 'center',marginBottom:25 }}>
         <Image
-          source={require("../assets/Teaching.png")}
+          source={require("../assets/Online learning-cuate.png")}
           style={{ width: 300, height: 300 }}
         />
       </View>
@@ -22,7 +22,7 @@ const WelcomeScreen = ({ navigation }) => {
           onPress={() => navigation.navigate("Sign Up")}
           style={{
             paddingVertical: 12,
-            backgroundColor: '#BA68C8',
+            backgroundColor: '#64C4C3',
             borderRadius: 30,
             marginBottom:10,
             margin:20,
@@ -34,7 +34,7 @@ const WelcomeScreen = ({ navigation }) => {
         <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
           <Text>Vous avez déjà un compte ? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={{ color: '#BA68C8', fontWeight: 'bold' }}>Se connecter</Text>
+            <Text style={{ color: '#64C4C3', fontWeight: 'bold' }}>Se connecter</Text>
           </TouchableOpacity>
         </View>
       </View>

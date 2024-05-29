@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   dropdownButton: {
     height: 40,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,

@@ -20,49 +20,49 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: '#faf5ff' }}>
-        <View className="flex-1 bg-[#faf5ff]">
+      <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: '#E7F6FD' }}>
+        <View className="flex-1 bg-[#64C4C3]">
           <SafeAreaView className="flex">
             <View className="flex-row justify-start">
               <TouchableOpacity
                 onPress={() => navigation.goBack()}
-                className="bg-[#BA68C8] rounded-tr-2xl ml-3 mt-8"
+                className="bg-[#E7F6FD] rounded-tr-2xl ml-3 mt-8"
               >
                 <Ionicons name="return-down-back-sharp" size={24} color="black" />
               </TouchableOpacity>
             </View>
             <View className="flex-row justify-center">
               <Image
-                source={require("../assets/singuppic.png")}
+                source={require("../assets/Online learning-amico (2).png")}
                 style={{ width: 230, height: 230 }}
               />
             </View>
           </SafeAreaView>
           <View
-            className="flex-1 bg-white px-8 pt-8"
+            className="flex-1 bg-[#E7F6FD] px-8 pt-8"
             style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
           >
             <View className="from space-y-2">
               <Text className="text-black ml-4">Email Adresse</Text>
               <TextInput
-                className="p-4 bg-[#f3f4f6] text-[#0b0b0b] rounded-[30px] mb-3"
+                className="p-4 bg-[#FFFFFF] text-[#0b0b0b] rounded-[30px] mb-3"
                 value={email}
                 onChangeText={(value) => setEmail(value)}
                 placeholder="Entrez votre adresse email"
               />
               <Text className="text-black ml-4">Mot de passe</Text>
               <TextInput
-                className="p-4 bg-[#f3f4f6] text-[#050505] rounded-[30px]"
+                className="p-4 bg-[#FFFFFF] text-[#050505] rounded-[30px]"
                 secureTextEntry
                 value={password}
                 onChangeText={(value) => setPassword(value)}
-                placeholder="entrez votre mot de passe"
+                placeholder="Entrez votre mot de passe"
               />
               <TouchableOpacity className="flex items-end mb-5">
                 <Text> Mot de passe oublié? </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                className="py-4 bg-[#BA68C8] rounded-[30px]"
+                className="py-4 bg-[#64C4C3] rounded-[30px]"
                 onPress={handleSubmit}
               >
                 <Text className="font-xl font-bold text-center text-white"> Connexion </Text>
@@ -71,7 +71,7 @@ const LoginScreen = ({ navigation }) => {
             <View className="flex-row justify-center m-10 font-semibold ">
               <Text>Vous n'avez pas un compte ? </Text>
               <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
-                <Text className="text-[#BA68C8] font-semibold ">Inscription</Text>
+                <Text className="text-[#64C4C3] font-semibold ">Inscription</Text>
               </TouchableOpacity>
             </View>
           </View>

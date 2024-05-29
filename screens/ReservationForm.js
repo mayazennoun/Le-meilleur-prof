@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Alert, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import {app,db,getFirestore,collection, addDoc} from '../config/firebase'
-
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { app, db, getFirestore, collection, addDoc } from '../config/firebase';
 
 const ReservationForm = () => {
+  const route = useRoute();
+  const { itemId, itemData } = route.params; // Recevoir l'ID et les données de l'élément
   const [mode, setMode] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
@@ -13,29 +14,28 @@ const ReservationForm = () => {
   const navigation = useNavigation();
 
   const handleSubmit = async () => {
- try {
-  const docRef = await addDoc(collection(db, "ReservationCours"), {
-     mode: mode,
-      adresse: address,
-      numtel: phone,
-      numcard:cardNumber,
-      
-  });
-  Alert.alert("Document écrit avec ID: ", docRef.id);
-   setMode('');
+    try {
+      const docRef = await addDoc(collection(db, "ReservationCours"), {
+        mode: mode,
+        adresse: address,
+        numtel: phone,
+        numcard: cardNumber,
+        itemId: itemId,
+      });
+      Alert.alert("Document écrit avec ID: ", docRef.id);
+      setMode('');
       setAddress('');
       setPhone('');
       setCardNumber('');
-    
-} catch (e) {
-  console.error("Erreur lors de l/'ajout de document : ", e);
-}
-};
+    } catch (e) {
+      console.error("Erreur lors de l'ajout de document : ", e);
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <Image source={require('../assets/teacheronline.png')} style={styles.image} />
+        <Image source={require('../assets/Webinar-cuate.png')} style={styles.image} />
 
         <View style={styles.formContainer}>
           <Text style={styles.title}>Réserver votre place</Text>
@@ -50,14 +50,14 @@ const ReservationForm = () => {
                 style={[styles.modeButton, mode === 'face' && styles.selectedMode]}
                 onPress={() => setMode('face')}
               >
-                <Ionicons name="person" size={24} color={mode === 'face' ? '#fff' : '#BA68C8'} />
+                <Ionicons name="person" size={24} color={mode === 'face' ? '#fff' : '#64C4C3'} />
                 <Text style={[styles.modeText, mode === 'face' && styles.selectedModeText]}>Face à face</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.modeButton, mode === 'webcam' && styles.selectedMode]}
                 onPress={() => setMode('webcam')}
               >
-                <Ionicons name="videocam" size={24} color={mode === 'webcam' ? '#fff' : '#BA68C8'} />
+                <Ionicons name="videocam" size={24} color={mode === 'webcam' ? '#fff' : '#64C4C3'} />
                 <Text style={[styles.modeText, mode === 'webcam' && styles.selectedModeText]}>Webcam</Text>
               </TouchableOpacity>
             </View>
@@ -107,7 +107,7 @@ const ReservationForm = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#E7F6FD',
   },
   scrollViewContainer: {
     flexGrow: 1,
@@ -157,15 +157,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#BA68C8',
+    borderColor: '#64C4C3',
   },
   selectedMode: {
-    backgroundColor: '#BA68C8',
+    backgroundColor: '#64C4C3',
   },
   modeText: {
     fontSize: 16,
     marginLeft: 8,
-    color: '#BA68C8',
+    color: '#64C4C3',
   },
   selectedModeText: {
     color: '#fff',
@@ -178,10 +178,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 16,
     color: '#333',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#ffffff',
   },
   submitButton: {
-    backgroundColor: '#BA68C8',
+    backgroundColor: '#64C4C3',
     borderRadius: 30,
     paddingVertical: 16,
     alignItems: 'center',
@@ -194,4 +194,5 @@ const styles = StyleSheet.create({
 });
 
 export default ReservationForm;
+
 

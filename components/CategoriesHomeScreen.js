@@ -3,16 +3,17 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const subjects = [
-  { name: 'Arabe', icon: 'abjad-arabic' },
+ 
+  { name: 'SVT', icon: 'leaf' },
+  { name: 'Chimie', icon: 'flask' },
+  { name: 'Philosophie', icon: 'thought-bubble' },
+  { name: 'Anglais', icon: 'alphabetical' },
+  { name: 'Informatique', icon: 'laptop' },
+   { name: 'Arabe', icon: 'abjad-arabic' },
   { name: 'Théâtre', icon: 'theater' },
   { name: 'Français', icon: 'alphabetical' },
   { name: 'Mathématiques', icon: 'math-integral' },
   { name: 'Histoire/Geo', icon: 'book-open-variant' },
-  { name: 'SVT', icon: 'leaf' },
-  { name: 'Chimie', icon: 'flask' },
-  { name: 'Philosophie', icon: 'thought-bubble' },
-  { name: 'Latin', icon: 'alphabetical' },
-  { name: 'Informatique', icon: 'laptop' },
 ];
 
 const SubjectItem = ({ item }) => (
@@ -37,11 +38,12 @@ const CategoriesHomeScreen = () => (
 const styles = StyleSheet.create({
   subjectContainer: {
     alignItems: 'center',
-    padding: 10,
+    padding: 6,
+    
   },
   iconContainer: {
-    backgroundColor: '#BA68C8',
-    padding: 8,
+    backgroundColor: '#64C4C3',
+    padding: 10,
     borderRadius: 50,
     marginBottom: 5,
   },
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   subjectName: {
+    
     fontSize: 14,
     textAlign: 'center',
   },

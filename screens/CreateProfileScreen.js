@@ -69,8 +69,8 @@ const handleSubmit = async () => {
         style={styles.input}
         value={tarif}
         onChangeText={setTarif}
-        placeholder=" Tarif par heure"
-        keyboardType="numeric"
+        placeholder=" Tarif "
+      
       />
       <TextInput
         style={styles.input}
@@ -88,10 +88,11 @@ const handleSubmit = async () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#E7F6FD',
     padding: 20,
     alignItems: 'center',
-    marginTop:20,
+    marginTop:30,
+    
   },
   title: {
     fontSize: 19,
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   submitButton: {
-    backgroundColor: '#BA68C8',
+    backgroundColor: '#64C4C3',
     padding: 15,
     borderRadius: 30,
     alignItems: 'center',
