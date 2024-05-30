@@ -52,17 +52,15 @@ const LoginScreen = ({ navigation }) => {
               />
               <Text className="text-black ml-4">Mot de passe</Text>
               <TextInput
-                className="p-4 bg-[#FFFFFF] text-[#050505] rounded-[30px]"
+                className="p-4 bg-[#FFFFFF] text-[#050505] my-8 rounded-[30px]"
                 secureTextEntry
                 value={password}
                 onChangeText={(value) => setPassword(value)}
                 placeholder="Entrez votre mot de passe"
               />
-              <TouchableOpacity className="flex items-end mb-5">
-                <Text> Mot de passe oublié? </Text>
-              </TouchableOpacity>
+           
               <TouchableOpacity
-                className="py-4 bg-[#64C4C3] rounded-[30px]"
+                className="py-4  bg-[#64C4C3] rounded-[30px]"
                 onPress={handleSubmit}
               >
                 <Text className="font-xl font-bold text-center text-white"> Connexion </Text>
