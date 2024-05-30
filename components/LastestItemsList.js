@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 const LatestItemsList = () => {
@@ -10,16 +10,15 @@ const LatestItemsList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "Profs"));
+      const unsubscribe = onSnapshot(collection(db, 'Profs'), (querySnapshot) => {
         const items = [];
         querySnapshot.forEach((doc) => {
           items.push({ id: doc.id, ...doc.data() });
         });
         setData(items);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des dernières annonces :", error);
-      }
+      });
+
+      return () => unsubscribe();
     };
 
     fetchData();

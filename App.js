@@ -43,7 +43,7 @@ export default function App() {
    <Stack.Screen name='Gift' component={CarteCadeauPage}/>
   <Stack.Screen name='MonProfile' component={MonprofilScreen}/>
   <Stack.Screen name='Explore' component={ExploreScreen}/>
-  <Stack.Screen name='MProfil' component={ProfilScreen}/>
+  <Stack.Screen name='Profile' component={ProfilScreen}/>
   <Stack.Screen name='ListReservation' component={ReservationsList}/>
  <Stack.Screen name='ChoicesScreen' component={ChoicesScreen}/>
  <Stack.Screen name='ResultsScreen' component={ResultsScreen}/>

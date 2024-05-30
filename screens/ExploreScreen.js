@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Alert } from 'react-native';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 import AnnonceList from './AnnonceList';
@@ -9,27 +8,24 @@ import AnnonceList from './AnnonceList';
 const ExploreScreen = () => {
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, 'Profs'));
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push({ id: doc.id, ...doc.data() });
-      });
-      setData(items);
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données : ', error);
-      Alert.alert('Erreur', 'Erreur lors de la récupération des données');
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const unsubscribe = onSnapshot(collection(db, 'Profs'), (querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push({ id: doc.id, ...doc.data() });
+        });
+        setData(items);
+      });
+
+      return () => unsubscribe();
+    };
+
     fetchData();
   }, []);
 
   return (
     <ScrollView style={styles.container}>
-      
       <AnnonceList data={data} />
     </ScrollView>
   );
@@ -43,6 +39,7 @@ const styles = StyleSheet.create({
 });
 
 export default ExploreScreen;
+
 
 
 

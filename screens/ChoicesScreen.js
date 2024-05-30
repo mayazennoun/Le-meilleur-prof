@@ -11,7 +11,7 @@ const ChoicesScreen = () => {
   const [selectedPlaces, setSelectedPlaces] = useState([]);
   const navigation = useNavigation();
 
-  const matieres = ['Anglais', 'Français', 'Chimie', 'Physique', 'Maths', 'Informatique'];
+  const matieres = ['Anglais', 'Français', 'Chimie', 'Physique', 'Maths', 'Informatique','SVT'];
   const tarifs = ['1200DA/Mois', '2000DA/Mois', '3000 DA', '3500 DA'];
   const places = ['Annaba - saint cloud', 'Annaba - Cité ElRym', 'Annaba - Sidi achour', 'Annaba Elbouni', 'Annaba Sidi Ammar', 'Annaba 8 Mars', 'Annaba Majestique'];
 

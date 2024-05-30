@@ -88,7 +88,7 @@ const CreateProfileScreen = () => {
       setTarif('');
       setAdresse('');
       setImage(null);
-      navigation.navigate('Profile');
+     
     } catch (e) {
       console.error("Erreur lors de l'ajout de document : ", e.message);
     } finally {
