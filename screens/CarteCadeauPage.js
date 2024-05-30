@@ -20,7 +20,7 @@ const CarteCadeauPage = ({ navigation }) => {
       </TouchableOpacity>
       <Text style={styles.text1}>Offrez l'apprentissage en cadeau  {'\n'}             avec nos cartes.</Text>
       <Image
-        source={require('../assets/Gift card.png')}
+        source={require('../assets/Gift card-rafiki.png')}
         style={styles.image}
       />
       <Text style={styles.text}>Insérez le code de votre carte cadeau :</Text>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#E7F6FD',
   },
   goBackButton: {
     position: 'absolute',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   button: {
-    backgroundColor: '#BA68C8',
+    backgroundColor: '#64C4C3',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 30,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 margin:25,
 fontWeight:'bold',
 fontSize:20,
-color:'#BA68C8',
+color:'#64C4C3',
   },
 });
 

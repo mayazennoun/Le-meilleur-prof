@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -21,6 +23,9 @@ const ReservationList = () => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back" size={35} color="#333" />
+      </TouchableOpacity>
       <Text style={styles.title}>Liste des Réservations</Text>
       <FlatList
         data={reservations}
@@ -58,10 +63,16 @@ const ReservationList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:35,
+    marginTop:40,
     flex: 1,
     backgroundColor: '#E7F6FD',
     padding: 16,
+  },
+  goBackButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 1,
   },
   title: {
     fontSize: 24,

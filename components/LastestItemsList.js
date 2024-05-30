@@ -26,15 +26,15 @@ const LatestItemsList = () => {
   }, []);
 
   return (
-    <View style={{ marginTop: 16 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Dernières annonces</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Dernières annonces</Text>
       <FlatList
         data={data}
         horizontal
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('Reservation', { itemId: item.id })}>
             <Image source={{ uri: item.image }} style={styles.image} />
-            <View>
+            <View style={styles.itemDetails}>
               <Text style={styles.title}>{item.titre}</Text>
               <Text style={styles.subtitle}>{item.nom} {item.prenom}</Text>
             </View>
@@ -48,9 +48,18 @@ const LatestItemsList = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 16,
+    paddingHorizontal: 10,
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginBottom: 10,
+  },
   itemContainer: {
     width: 250,
-    margin: 8,
+    marginHorizontal: 8,
     padding: 8,
     borderRadius: 8,
     borderWidth: 1,
@@ -63,16 +72,20 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: 'cover',
-    borderRadius: 50,
+    borderRadius: 8,
     marginRight: 8,
+  },
+  itemDetails: {
+    flex: 1,
   },
   title: {
     fontSize: 15,
     fontWeight: 'bold',
+    marginBottom: 4,
   },
   subtitle: {
     fontSize: 12,
-    marginTop: 4,
+    color: '#666',
   },
 });
 

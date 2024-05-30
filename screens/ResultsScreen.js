@@ -1,36 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { teacherData } from '../components/LastestItemsList';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const ResultsScreen = ({ route }) => {
-  const { selectedFilters, selectedTarif, selectedPlace } = route.params;
-
-  // Filtrer les données en fonction des critères sélectionnés
-  const filteredData = teacherData.filter((item) => {
-    // Vérifier si la matière est incluse dans les filtres sélectionnés
-    const isMatiereIncluded = selectedFilters.includes(item.title.split(' ')[2]);
-
-    // Vérifier si le tarif correspond au tarif sélectionné
-    const isTarifMatched = selectedTarif ? item.title.includes(selectedTarif) : true;
-
-    // Vérifier si l'endroit correspond à l'endroit sélectionné
-    const isPlaceMatched = selectedPlace ? item.title.includes(selectedPlace) : true;
-
-    // Retourner vrai si toutes les conditions sont remplies
-    return isMatiereIncluded && isTarifMatched && isPlaceMatched;
-  });
+const ResultsScreen = ({ route, navigation }) => {
+  const { results } = route.params;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Résultats du filtrage :</Text>
-      {filteredData.length === 0 ? (
-        <Text style={styles.noResultText}>Aucun résultat trouvé.</Text>
-      ) : (
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
+        <Ionicons name="arrow-back" size={40} color="#333" />
+      </TouchableOpacity>
+      <Text style={styles.title}>         Résultats de la recherche</Text>
+      {results.length > 0 ? (
         <FlatList
-          data={filteredData}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
-          keyExtractor={(item) => item.id.toString()}
+          data={results}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.resultItem}>
+              <Image source={{ uri: item.image }} style={styles.image} />
+              <View style={styles.detailsContainer}>
+                <Text style={styles.resultText}>Nom: {item.nom}</Text>
+                <Text style={styles.resultText}>Matière: {item.matiere}</Text>
+                <Text style={styles.resultText}>Tarif: {item.tarif}</Text>
+                <Text style={styles.resultText}>Adresse: {item.adresse}</Text>
+                <Text style={styles.resultText}>Description: {item.description}</Text>
+              </View>
+            </View>
+          )}
         />
+      ) : (
+        <Text style={styles.noResults}>Aucun résultat trouvé</Text>
       )}
     </View>
   );
@@ -38,18 +37,49 @@ const ResultsScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:30,
     flex: 1,
     padding: 20,
     backgroundColor: '#E7F6FD',
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  goBackButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 1,
+    marginTop:5,
   },
-  noResultText: {
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  resultItem: {
+    borderColor:'#64C4C3',
+    backgroundColor: '#FFFFFF',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+    marginRight: 15,
+  },
+  detailsContainer: {
+    flex: 1,
+  },
+  resultText: {
     fontSize: 16,
-    color: 'red',
+    marginBottom: 5,
+  },
+  noResults: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 

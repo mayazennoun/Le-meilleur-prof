@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { app, db, collection, addDoc } from '../config/firebase';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const CreateProfileScreen = () => {
   const [nom, setNom] = useState('');
@@ -13,6 +15,7 @@ const CreateProfileScreen = () => {
   const [adresse, setAdresse] = useState('');
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const navigation = useNavigation();
 
   const onButtonPress = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -22,7 +25,7 @@ const CreateProfileScreen = () => {
       quality: 1,
     });
 
-    if (!result.canceled) {
+    if (!result.cancelled) {
       setImage(result.assets[0].uri);
     }
   };
@@ -85,6 +88,7 @@ const CreateProfileScreen = () => {
       setTarif('');
       setAdresse('');
       setImage(null);
+      navigation.navigate('Profile');
     } catch (e) {
       console.error("Erreur lors de l'ajout de document : ", e.message);
     } finally {
@@ -101,6 +105,7 @@ const CreateProfileScreen = () => {
           <Image source={{ uri: image }} style={styles.image} />
         ) : (
           <View style={styles.addImageButton}>
+            <MaterialCommunityIcons name="camera" size={40} color="#666" />
             <Text style={styles.addImageText}>Ajouter une photo</Text>
           </View>
         )}
@@ -110,7 +115,7 @@ const CreateProfileScreen = () => {
         style={styles.input}
         value={nom}
         onChangeText={setNom}
-        placeholder="Nom Prenom"
+        placeholder="Nom Prénom"
       />
       <TextInput
         style={styles.input}
@@ -128,7 +133,7 @@ const CreateProfileScreen = () => {
       <TextInput
         style={styles.input}
         value={matiere}
-        onChangeText={setMatiere}-
+        onChangeText={setMatiere}
         placeholder="Matière enseignée"
       />
       <TextInput
@@ -165,8 +170,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   imageContainer: {
-    width: 200,
-    height: 200,
+    width: 170,
+    height: 170,
     borderRadius: 100,
     backgroundColor: '#ddd',
     alignItems: 'center',

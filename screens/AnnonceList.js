@@ -26,14 +26,14 @@ const AnnonceList = () => {
   }, []);
 
   return (
-    <View style={{ marginTop: 38 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 30 }}>Explore</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Explore</Text>
       <FlatList
         data={data}
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
             <Image source={{ uri: item.image }} style={styles.image} />
-            <View>
+            <View style={styles.itemDetails}>
               <Text style={styles.title}>{item.titre}</Text>
               <Text style={styles.subtitle}>{item.nom}</Text>
               <Text style={styles.subtitle}>{item.matiere}</Text>
@@ -43,7 +43,7 @@ const AnnonceList = () => {
                 style={styles.button}
                 onPress={() => navigation.navigate('Reservation', { itemId: item.id })}
               >
-                <Text style={styles.buttonText}>   Réserver  </Text>
+                <Text style={styles.buttonText}>Réserver</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -56,47 +56,59 @@ const AnnonceList = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 38,
+    paddingHorizontal: 20,
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    marginBottom: 20,
+  },
   itemContainer: {
-    marginVertical: 8,
-    padding: 8,
-    borderRadius: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#64C4C3',
     backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    alignItems: 'center',
+    padding: 10,
+  },
+  itemDetails: {
+    flex: 1,
+    marginLeft: 10,
   },
   image: {
     width: 100,
     height: 100,
     resizeMode: 'cover',
-    borderRadius: 25,
-    marginRight: 8,
+    borderRadius: 10,
   },
   title: {
     fontSize: 15,
     fontWeight: 'bold',
-    marginTop: 8,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 12,
-    marginTop: 4,
     textAlign: 'center',
   },
-  button:{
-    marginTop:25,
-    fontWeight: 'bold',
-    padding: 15,
+  button: {
+    marginTop: 10,
     backgroundColor: '#64C4C3',
-    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignSelf: 'flex-start',
   },
-  buttonText:{
+  buttonText: {
     fontWeight: 'bold',
-    color:'white',
+    color: 'white',
   },
 });
 
 export default AnnonceList;
+
 
 

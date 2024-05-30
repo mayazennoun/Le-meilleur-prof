@@ -21,7 +21,7 @@ const HomeScreen = ({navigation}) => {
  <TextInput
         style={styles.searchBar}
         placeholder="Rechercher..."
-        // Ajoutez des gestionnaires d'événements si nécessaire
+      
       />
  <TouchableOpacity style={styles.filterButton} onPress={handleFilterNavigation}>
         <Text style={styles.filterButtonText}>Filtrer</Text>
@@ -52,10 +52,10 @@ const styles = StyleSheet.create({
    fontSize: 20,
   },
   filterButton: {
-    marginTop:25,
+    marginTop:20,
     backgroundColor: '#64C4C3',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 25,
     marginBottom: 5,
     alignItems: 'center',
   },
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
    searchBar: {
-    marginTop:12,
+    marginTop:18,
     height: 40,
     borderColor: '#FFFF',
     backgroundColor:'#FFFFFF',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 25,
     paddingHorizontal: 10,
     marginRight: 10,
     marginBottom: -9,
